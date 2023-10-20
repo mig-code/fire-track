@@ -7,21 +7,34 @@ import Footer from '../footer/footer';
 import Header from '../header/header';
 import Pagination from '../pagination/pagination';
 import './App.scss';
-import { listOfFires } from '../../mocks/fires';
+
+import { getFires } from '../../services/api';
 
 const App = () => {
   const [fires, setFires] = useState([]);
 
+  const fetchFires = async () => {
+    const fires = await getFires();
+    setFires(fires);
+  };
+
   useEffect(() => {
-    setFires(listOfFires.results);
+    fetchFires();
   }, []);
+  console.log(fires);
 
   return (
     <div className='layout-container'>
       <Header />
       <div className='page-container'>
         <FiresFilter></FiresFilter>
-        <FiresTable fires={fires}></FiresTable>
+        {fires.length === 0 ? (
+          <div className='loading'>
+            <p>Loading...</p>
+          </div>
+        ) : (
+          <FiresTable fires={fires.results}></FiresTable>
+        )}
         <Pagination></Pagination>
         <FiresMap></FiresMap>
       </div>

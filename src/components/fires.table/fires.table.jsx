@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import './fires.table.scss';
 
 const FiresTable = ({ fires }) => {
