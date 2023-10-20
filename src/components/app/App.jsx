@@ -1,4 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
+
+import uuid from 'react-uuid';
 
 import FiresFilter from '../fires.filter/fires.filter';
 import FiresMap from '../fires.map/fires.map';
@@ -11,17 +13,29 @@ import './App.scss';
 import { getFires } from '../../services/api';
 
 const App = () => {
+  console.log('RENDER');
   const [fires, setFires] = useState([]);
 
-  const fetchFires = async () => {
+
+ // Fetch fires from the API
+  const fetchFires = useCallback(async () => {
     const fires = await getFires();
-    setFires(fires);
-  };
+
+    // Here i add an id to each fire to be able to render 
+    const updatedResults = fires.results.map((fire) => ({
+      ...fire,
+      id: uuid(),
+    }));
+
+    setFires({ ...fires, results: updatedResults });
+  }, []);
+
+
+
 
   useEffect(() => {
     fetchFires();
-  }, []);
-  console.log(fires);
+  }, [fetchFires]);
 
   return (
     <div className='layout-container'>
