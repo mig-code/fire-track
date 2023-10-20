@@ -1,0 +1,8 @@
+@import './styles/reset.scss';
+@import './styles/variables.scss';
+
+:root {
+  font-family: $font-stack-primary;
+  color: $color-black;
+  background-color: $color-white;
+}
