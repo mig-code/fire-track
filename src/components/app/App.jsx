@@ -15,12 +15,14 @@ import { getFires } from '../../services/api';
 const App = () => {
   const [fires, setFires] = useState([]);
   const [offSetPage, setOffSetPage] = useState(0);
-  console.log(offSetPage);
+  const [urlFilter, setUrlFilter] = useState('');
   console.log(fires.total_count);
+
+  console.log(urlFilter);
 
   // Fetch fires from the API
   const fetchFires = useCallback(async () => {
-    const fires = await getFires(offSetPage);
+    const fires = await getFires(offSetPage, urlFilter);
 
     // Here i add an id to each fire to be able to render
     const updatedResults = fires.results.map((fire) => ({
@@ -29,7 +31,7 @@ const App = () => {
     }));
 
     setFires({ ...fires, results: updatedResults });
-  }, [offSetPage]);
+  }, [offSetPage, urlFilter]);
 
   useEffect(() => {
     fetchFires();
@@ -39,7 +41,7 @@ const App = () => {
     <div className='layout-container'>
       <Header />
       <div className='page-container'>
-        <FiresFilter></FiresFilter>
+        <FiresFilter setUrlFilter={setUrlFilter}></FiresFilter>
         {fires.length === 0 ? (
           <div className='loading'>
             <p>Loading...</p>

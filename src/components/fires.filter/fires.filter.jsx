@@ -1,7 +1,9 @@
-import { useState } from 'react';
+/* eslint-disable react/prop-types */
+
+import { useCallback, useEffect, useState } from 'react';
 import './fires.filter.scss';
 
-const FiresFilter = () => {
+const FiresFilter = ({ setUrlFilter }) => {
   const initialForm = {
     provincia: '',
     estado: '',
@@ -11,7 +13,32 @@ const FiresFilter = () => {
 
   const [form, setForm] = useState(initialForm);
 
-  console.log(form);
+
+  // This function generates the encoder url to be used in the API call
+
+  const generateUrl = useCallback(() => {
+    let url = '';
+    if (form.provincia) {
+      url +=
+        '&refine=provincia%3A' + encodeURI(JSON.stringify(`${form.provincia}`));
+    }
+    if (form.estado) {
+      url +=
+        '&refine=situacion_actual%3A' +
+        encodeURI(JSON.stringify(`${form.estado}`));
+    }
+    if (form.nivelMax) {
+      url +=
+        '&refine=nivel_maximo_alcanzado%3A' +
+        encodeURI(JSON.stringify(`${form.nivelMax}`));
+    }
+    if (form.causa) {
+      url +=
+        '&refine=causa_probable%3A' +
+        encodeURI(JSON.stringify(`${form.causa}`));
+    }
+    return url;
+  }, [form]);
 
   const handleSelectChange = (e) => {
     const { name, value } = e.target;
@@ -20,6 +47,10 @@ const FiresFilter = () => {
       [name]: value,
     });
   };
+
+  useEffect(() => {
+    setUrlFilter(generateUrl());
+  }, [form, setUrlFilter, generateUrl]);
 
   return (
     <div className='fires-filter'>
@@ -32,7 +63,7 @@ const FiresFilter = () => {
           <option value=''>Provincia</option>
           <option value='ÁVILA'>ÁVILA</option>
           <option value='BURGOS'>BURGOS</option>
-          <option value='LEÓN'>CANTABRIA</option>
+          <option value='CANTABRIA'>CANTABRIA</option>
           <option value='LEÓN'>LEÓN</option>
           <option value='ORENSE'>PALENCIA</option>
           <option value='PALENCIA'>PALENCIA</option>
@@ -44,9 +75,9 @@ const FiresFilter = () => {
         </select>
         <select name='estado' value={form.estado} onChange={handleSelectChange}>
           <option value=''>Estado</option>
+          <option value='ACTIVO'>ACTIVO</option>
           <option value='CONTROLADO'>CONTROLADO</option>
           <option value='EXTINGUIDO'>EXTINGUIDO</option>
-          <option value='EN INVESTIGACIÓN'>EN INVESTIGACIÓN</option>
         </select>
 
         <select
