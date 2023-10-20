@@ -1,0 +1,27 @@
+@import '../../styles/variables.scss';
+
+.table-container {
+  margin-top: 1rem;
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+
+    th {
+      padding: 1em;
+
+      border: 1px solid $color-black;
+      background-color: $color-primary;
+      color: $color-white;
+      font-weight: bold;
+    }
+    td {
+      padding: 0.4rem;
+      border: 1px solid $color-primary;
+      text-align: center;
+    }
+  }
+}
