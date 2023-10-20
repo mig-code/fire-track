@@ -13,25 +13,23 @@ import './App.scss';
 import { getFires } from '../../services/api';
 
 const App = () => {
-  console.log('RENDER');
   const [fires, setFires] = useState([]);
+  const [offSetPage, setOffSetPage] = useState(0);
+  console.log(offSetPage);
+  console.log(fires.total_count);
 
-
- // Fetch fires from the API
+  // Fetch fires from the API
   const fetchFires = useCallback(async () => {
-    const fires = await getFires();
+    const fires = await getFires(offSetPage);
 
-    // Here i add an id to each fire to be able to render 
+    // Here i add an id to each fire to be able to render
     const updatedResults = fires.results.map((fire) => ({
       ...fire,
       id: uuid(),
     }));
 
     setFires({ ...fires, results: updatedResults });
-  }, []);
-
-
-
+  }, [offSetPage]);
 
   useEffect(() => {
     fetchFires();
@@ -47,9 +45,16 @@ const App = () => {
             <p>Loading...</p>
           </div>
         ) : (
-          <FiresTable fires={fires.results}></FiresTable>
+          <>
+            <FiresTable fires={fires.results}></FiresTable>
+            <Pagination
+              offSetPage={offSetPage}
+              setOffsetPage={setOffSetPage}
+              totalElements={fires.total_count}
+            ></Pagination>
+          </>
         )}
-        <Pagination></Pagination>
+
         <FiresMap></FiresMap>
       </div>
       <Footer />

@@ -1,0 +1,31 @@
+@import '../../styles/variables.scss';
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+
+  &__current-page {
+    margin: 0 0.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+  }
+  &__button {
+    cursor: pointer;
+    font-size: $font-size-body;
+    color: $color-white;
+    background-color: $color-primary;
+    border: 1px solid $color-primary;
+
+    padding: 0.3rem 0.8rem;
+
+    border-radius: 0.5rem;
+    transition: all 0.1s ease-in-out;
+
+    &:hover {
+      color: $color-secondary;
+      background-color: $color-primary;
+    }
+  }
+}
