@@ -3,7 +3,7 @@ import './header.scss';
 const Header = () => {
   return (
     <div className='header'>
-      <h1>Fire Track</h1>
+      <h1 className='header__title'>Fire Track</h1>
     </div>
   );
 };

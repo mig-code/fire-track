@@ -1,4 +1,8 @@
+@import './styles/reset.scss';
+@import './styles/variables.scss';
+
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+  font-family: $font-stack-primary;
+  color: $color-black;
+  background-color: $color-white;
 }

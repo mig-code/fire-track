@@ -8,14 +8,16 @@ import './App.scss';
 
 const App = () => {
   return (
-    <>
+    <div className='layout-container'>
       <Header />
-      <FiresFilter></FiresFilter>
-      <FiresTable></FiresTable>
-      <Pagination></Pagination>
-      <FiresMap></FiresMap>
+      <div className='page-container'>
+        <FiresFilter></FiresFilter>
+        <FiresTable></FiresTable>
+        <Pagination></Pagination>
+        <FiresMap></FiresMap>
+      </div>
       <Footer />
-    </>
+    </div>
   );
 };
 

@@ -3,9 +3,12 @@ import './footer.scss';
 const Footer = () => {
   return (
     <footer className='footer'>
-      <div className='footer__container'>
-        <p>Footer</p>
-      </div>
+      <p className='footer__text'>
+        Made with ❤️ by{' '}
+        <a className='footer__link' href='https://github.com/mig-code'>
+          Miguel PGómez
+        </a>
+      </p>
     </footer>
   );
 };
