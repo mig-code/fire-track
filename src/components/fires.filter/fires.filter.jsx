@@ -13,10 +13,16 @@ const FiresFilter = ({ setUrlFilter }) => {
 
   const [form, setForm] = useState(initialForm);
 
+  const handleSelectChange = (e) => {
+    const { name, value } = e.target;
+    setForm({
+      ...form,
+      [name]: value,
+    });
+  };
 
-  // This function generates the encoder url to be used in the API call
-
-  const generateUrl = useCallback(() => {
+  // This helper function generates the encoder url to be used in the API call
+  const generateCodedUrl = useCallback(() => {
     let url = '';
     if (form.provincia) {
       url +=
@@ -40,21 +46,13 @@ const FiresFilter = ({ setUrlFilter }) => {
     return url;
   }, [form]);
 
-  const handleSelectChange = (e) => {
-    const { name, value } = e.target;
-    setForm({
-      ...form,
-      [name]: value,
-    });
-  };
-
   useEffect(() => {
-    setUrlFilter(generateUrl());
-  }, [form, setUrlFilter, generateUrl]);
+    setUrlFilter(generateCodedUrl());
+  }, [form, setUrlFilter, generateCodedUrl]);
 
   return (
     <div className='fires-filter'>
-      <form action=''>
+      <form className='fires-filter__form' action=''>
         <select
           name='provincia'
           value={form.provincia}
