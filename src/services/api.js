@@ -1,5 +1,5 @@
 export const totalFiresPerRequest = 15;
-const baseUrl = `https://analisis.datosabiertos.jcyl.es//api/explore/v2.1/catalog/datasets/incendios-forestales/`;
+const baseUrl = import.meta.env.VITE_API_URL;
 
 export const getFires = async (offset, urlFilter) => {
   // Strings to build the url

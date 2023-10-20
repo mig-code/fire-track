@@ -16,9 +16,8 @@ const App = () => {
   const [fires, setFires] = useState([]);
   const [offSetPage, setOffSetPage] = useState(0);
   const [urlFilter, setUrlFilter] = useState('');
-  console.log(fires.total_count);
 
-  console.log(urlFilter);
+  console.log(fires.results);
 
   // Fetch fires from the API
   const fetchFires = useCallback(async () => {
@@ -41,7 +40,10 @@ const App = () => {
     <div className='layout-container'>
       <Header />
       <div className='page-container'>
-        <FiresFilter setUrlFilter={setUrlFilter} setOffSetPage={setOffSetPage}></FiresFilter>
+        <FiresFilter
+          setUrlFilter={setUrlFilter}
+          setOffSetPage={setOffSetPage}
+        ></FiresFilter>
         {fires.length === 0 ? (
           <div className='loading'>
             <p>Loading...</p>
@@ -57,7 +59,13 @@ const App = () => {
           </>
         )}
 
-        <FiresMap></FiresMap>
+        {!fires.results ? (
+          <div className='loading'>
+            <p>Loading...</p>
+          </div>
+        ) : (
+          <FiresMap fireMarkers={fires.results}></FiresMap>
+        )}
       </div>
       <Footer />
     </div>
