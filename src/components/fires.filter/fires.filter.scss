@@ -1,18 +1,40 @@
 @import '../../styles/variables.scss';
 
 .fires-filter {
+  &__info {
+    font-size: $font-size-body;
+    color: $color-primary;
+  }
   &__form {
     display: flex;
     flex-direction: row;
     margin: 0.5rem 0;
+
     select {
       margin: 0 1rem 0 0;
       padding: 0.3rem 0.5rem;
       border-radius: 2px;
       border: 1px solid $color-primary;
       background-color: $color-white;
-      font-size: 0.8rem;
+      color: $color-primary;
+      font-size: 0.9rem;
       font-weight: bold;
+    }
+  }
+}
+
+// media quey for mobile devices
+
+@media (max-width: 600px) {
+  .fires-filter {
+    &__form {
+      flex-direction: column;
+
+      select {
+        width: 80%;
+        margin: 0 0 0.5rem 0;
+        font-size: 0.7rem;
+      }
     }
   }
 }
