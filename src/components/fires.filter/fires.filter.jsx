@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import './fires.filter.scss';
 
-const FiresFilter = ({ setUrlFilter }) => {
+const FiresFilter = ({ setUrlFilter, setOffSetPage }) => {
   const initialForm = {
     provincia: '',
     estado: '',
@@ -19,6 +19,9 @@ const FiresFilter = ({ setUrlFilter }) => {
       ...form,
       [name]: value,
     });
+    
+    // Reset the offset page to 0 when a filter is applied
+    setOffSetPage(0);
   };
 
   // This helper function generates the encoder url to be used in the API call

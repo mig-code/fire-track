@@ -41,7 +41,7 @@ const App = () => {
     <div className='layout-container'>
       <Header />
       <div className='page-container'>
-        <FiresFilter setUrlFilter={setUrlFilter}></FiresFilter>
+        <FiresFilter setUrlFilter={setUrlFilter} setOffSetPage={setOffSetPage}></FiresFilter>
         {fires.length === 0 ? (
           <div className='loading'>
             <p>Loading...</p>

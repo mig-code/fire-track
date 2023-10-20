@@ -4,21 +4,19 @@ import './pagination.scss';
 import { totalFiresPerRequest } from '../../services/api';
 
 const Pagination = ({ offSetPage, setOffsetPage, totalElements }) => {
-
   //Math to calculate the total pages and the current page
   const totalPages = Math.ceil(totalElements / totalFiresPerRequest);
   const currentePage = offSetPage / totalFiresPerRequest + 1;
-  
 
   // Handlers for pagination
   const handlePreviousPage = () => {
-    if (offSetPage > 0) {
+    if (currentePage > 1) {
       setOffsetPage(offSetPage - totalFiresPerRequest);
     }
   };
 
   const handleNextPage = () => {
-    if (offSetPage < totalElements) {
+    if (currentePage < totalPages) {
       setOffsetPage(offSetPage + totalFiresPerRequest);
     }
   };
