@@ -2,15 +2,13 @@ export const totalFiresPerRequest = 15;
 const baseUrl = import.meta.env.VITE_API_URL;
 
 export const getFires = async (offset, urlFilter) => {
+  
   // Strings to build the url
-  console.log(urlFilter, 'en api');
+  const totaFiresPerRequestString = `records?limit=${totalFiresPerRequest}`;
+  const offsetStart = `&offset=${offset}`;
+  const defaultfilter = `&where=fecha_del_parte%20%3E%202021&order_by=fecha_del_parte%20desc`;
 
-  const totaFiresString = `records?limit=${totalFiresPerRequest}`;
-  const offsetString = `&offset=${offset}`;
-  const defaultfilterString = `&where=fecha_del_parte%20%3E%202021&order_by=fecha_del_parte%20desc`;
-
-  const url = `${baseUrl}${totaFiresString}${offsetString}${defaultfilterString}${urlFilter}`;
-  console.log(url);
+  const url = `${baseUrl}${totaFiresPerRequestString}${offsetStart}${defaultfilter}${urlFilter}`;
 
   try {
     const result = await fetch(url);
