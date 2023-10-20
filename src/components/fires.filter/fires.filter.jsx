@@ -61,13 +61,14 @@ const FiresFilter = ({ setUrlFilter, setOffSetPage }) => {
 
   return (
     <div className='fires-filter'>
+      <p className='fires-filter__info'>Filtar por:</p>
       <form className='fires-filter__form' action=''>
         <select
           name='provincia'
           value={form.provincia}
           onChange={handleSelectChange}
         >
-          <option value=''>Provincia</option>
+          <option value=''>Provincia </option>
           <option value='ÁVILA'>ÁVILA</option>
           <option value='BURGOS'>BURGOS</option>
           <option value='LEÓN'>LEÓN</option>

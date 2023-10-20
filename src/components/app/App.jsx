@@ -17,8 +17,6 @@ const App = () => {
   const [offSetPage, setOffSetPage] = useState(0);
   const [urlFilter, setUrlFilter] = useState('');
 
-  console.log(fires.results);
-
   // Fetch fires from the API
   const fetchFires = useCallback(async () => {
     const fires = await getFires(offSetPage, urlFilter);
